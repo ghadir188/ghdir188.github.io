@@ -1,0 +1,1373 @@
+<!doctype html>
+<!--
+  YOUR PORTFOLIO - ONE FILE, THREE PARTS
+  ---------------------------------------------------------------
+  1. HTML  (the <body> below)   = the content: text, sections, buttons
+  2. CSS   (the <style> tag)    = the design: colors, fonts, animations
+  3. JS    (the script tags)    = the behavior: typing, cursor, form
+
+  QUICK EDITS
+  - Your name, email, links, typing words -> search for "CONFIG" (bottom of file)
+  - Colors                                -> search for "1. COLORS" (in <style>)
+  - Project cards / about text            -> search for "PROJECTS" / "ABOUT" (in <body>)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ghadir Chamas  · Full-stack developer & AI automations</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================================
+         1. COLORS
+         Change the palette here. Light mode = first block, dark mode = the two blocks after it.
+      =============================================================== */
+      :root {
+        --bg: #fbf8f3;
+        --blush: #f1e6d6;
+        --ink: #0f1e3f;
+        --muted: #4a5870;
+        --rose: #213a56;
+        --gold: #997953;
+        --line: #e4d6c1;
+        --card: #ffffff;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0f1e3f;
+          --blush: #16294d;
+          --ink: #f6ecdd;
+          --muted: #b8b3a8;
+          --rose: #e3c9a2;
+          --gold: #cdaa80;
+          --line: #2c4666;
+          --card: #162b4a;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0f1e3f;
+        --blush: #16294d;
+        --ink: #f6ecdd;
+        --muted: #b8b3a8;
+        --rose: #e3c9a2;
+        --gold: #cdaa80;
+        --line: #2c4666;
+        --card: #162b4a;
+      }
+      /* ============================================================
+         2. BASE STYLES
+         Page font, background, and default text.
+      =============================================================== */
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        scroll-behavior: smooth;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          400 17px/1.65 Jost,
+          system-ui,
+          sans-serif;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 500;
+        line-height: 1.1;
+        margin: 0;
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+      }
+      /* ============================================================
+         3. LAYOUT & NAVIGATION BAR
+      =============================================================== */
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 0;
+      }
+      nav .logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 24px;
+        font-style: italic;
+      }
+      nav div {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+      }
+      nav a {
+        text-decoration: none;
+        color: var(--muted);
+      }
+      nav a:hover {
+        color: var(--ink);
+      }
+      #theme {
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        border-radius: 99px;
+        padding: 4px 12px;
+        font: inherit;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      /* ============================================================
+         4. HERO (name, typing line, intro, buttons)
+      =============================================================== */
+      .hero {
+        padding: 88px 0 104px;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        perspective: 1200px;
+      }
+      .hero h1 {
+        font-size: clamp(46px, 7vw, 88px);
+        letter-spacing: -0.01em;
+      }
+      .hero h1 em {
+        color: var(--rose);
+      }
+      .hero p {
+        max-width: 46ch;
+        margin-left: auto;
+        margin-right: auto;
+        color: var(--muted);
+        font-size: 19px;
+        margin: 24px 0 32px;
+      }
+      /* ============================================================
+         5. BUTTONS
+         .btn = every pill-shaped button. .fill = solid, .ghost = outlined.
+      =============================================================== */
+      .btn {
+        display: inline-block;
+        padding: 13px 28px;
+        border-radius: 99px;
+        text-decoration: none;
+        font-weight: 500;
+        border: 1px solid var(--gold);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .btn.fill {
+        background: var(--gold);
+        color: #fff;
+      }
+      .btn.fill:hover {
+        background: var(--rose);
+        border-color: var(--rose);
+      }
+      .btn.ghost {
+        margin-left: 10px;
+      }
+      .btn.ghost:hover {
+        background: var(--blush);
+      }
+      /* ============================================================
+         6. SECTIONS & PROJECT CARDS
+      =============================================================== */
+      section {
+        padding: 72px 0;
+        border-top: 1px solid var(--line);
+      }
+      section > .wrap > h2 {
+        font-size: clamp(34px, 5vw, 52px);
+        margin-bottom: 12px;
+      }
+      .lead {
+        color: var(--muted);
+        max-width: 56ch;
+        margin: 0 0 40px;
+      }
+      .projects {
+        display: grid;
+        gap: 20px;
+      }
+      .proj {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 28px;
+        padding: 28px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+      }
+      .proj .tag {
+        color: var(--gold);
+        font-size: 14px;
+      }
+      .proj h3 {
+        font-size: 30px;
+        margin: 4px 0 8px;
+      }
+      .proj p {
+        margin: 0 0 10px;
+        color: var(--muted);
+      }
+      .proj .stack {
+        font-size: 14px;
+        color: var(--rose);
+      }
+      /* ============================================================
+         7. AI AUTOMATION PLAYGROUND
+      =============================================================== */
+      .play {
+        background: var(--blush);
+        border: 1px solid var(--gold);
+        border-radius: 28px;
+        padding: 32px;
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 32px;
+      }
+      .play label {
+        display: block;
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      .play select {
+        width: 100%;
+        padding: 11px 14px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--ink);
+        font: inherit;
+      }
+      .play button {
+        width: 100%;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 500;
+      }
+      .log {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        font:
+          13.5px/1.8 ui-monospace,
+          Menlo,
+          monospace;
+        min-height: 260px;
+        overflow-x: auto;
+      }
+      .log .ok {
+        color: var(--gold);
+      }
+      .log .dim {
+        color: var(--muted);
+      }
+      /* ============================================================
+         8. SKILLS & ABOUT
+      =============================================================== */
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .skills span {
+        padding: 8px 18px;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        background: var(--card);
+      }
+      .about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+      .about p {
+        margin: 0 0 16px;
+        color: var(--muted);
+      }
+      .contact-grid > div,
+      .contact-grid > form {
+        margin-top: 28px;
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        padding: 32px 0 48px;
+      }
+      @media (max-width: 760px) {
+        .hero,
+        .about,
+        .play,
+        .proj {
+          grid-template-columns: 1fr;
+        }
+        nav div a.hide {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* ============================================================
+         9. SCROLL & HOVER ANIMATIONS
+         Progress bar, sections flipping in, card tilt/glow, press effects.
+      =============================================================== */
+      #bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--rose));
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+        z-index: 50;
+      }
+      .rv {
+        opacity: 0;
+        translate: 0 40px;
+        rotate: 1 0 0 16deg;
+        transform-origin: 50% 100%;
+        transition:
+          opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+          translate 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+          rotate 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s);
+      }
+      .rv.in {
+        opacity: 1;
+        translate: 0 0;
+        rotate: 1 0 0 0deg;
+      }
+      .wd {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: top;
+        padding-bottom: 0.12em;
+      }
+      .wd > span {
+        display: inline-block;
+        transform: translateY(110%);
+        animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+        animation-delay: calc(var(--i) * 0.08s + 0.15s);
+      }
+      @keyframes rise {
+        to {
+          transform: none;
+        }
+      }
+      nav a {
+        position: relative;
+      }
+      nav a:not(.logo)::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 1px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s;
+      }
+      nav a:hover::after {
+        transform: scaleX(1);
+      }
+      .btn {
+        transition:
+          background 0.3s,
+          color 0.3s,
+          translate 0.25s ease-out,
+          box-shadow 0.3s;
+      }
+      .btn.fill:hover {
+        box-shadow: 0 10px 28px color-mix(in srgb, var(--gold) 45%, transparent);
+      }
+      .proj {
+        position: relative;
+        transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+          scale(var(--s, 1));
+        transition:
+          transform 0.25s ease-out,
+          border-color 0.3s,
+          box-shadow 0.3s,
+          opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+          translate 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+          rotate 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s);
+      }
+      .proj:hover {
+        border-color: var(--gold);
+        box-shadow: 0 22px 50px color-mix(in srgb, var(--rose) 22%, transparent);
+      }
+      .proj::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+        background: radial-gradient(
+          420px circle at var(--mx, 50%) var(--my, 50%),
+          color-mix(in srgb, var(--gold) 24%, transparent),
+          transparent 60%
+        );
+      }
+      .proj:hover::after {
+        opacity: 1;
+      }
+      .skills span {
+        transition:
+          translate 0.25s,
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .skills span:hover {
+        translate: 0 -4px;
+        background: var(--blush);
+        border-color: var(--gold);
+      }
+      .log div {
+        animation: slide 0.45s both;
+      }
+      @keyframes slide {
+        from {
+          opacity: 0;
+          translate: -10px 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .wd > span {
+          transform: none;
+          animation: none;
+        }
+        .rv {
+          opacity: 1;
+          translate: none;
+          rotate: none;
+        }
+      }
+
+      /* ============================================================
+         10. TYPING LINE UNDER YOUR NAME
+      =============================================================== */
+      .type {
+        font:
+          italic 500 clamp(22px, 3.2vw, 34px)/1.3 "Cormorant Garamond",
+          Georgia,
+          serif;
+        color: var(--gold);
+        margin-top: 14px;
+        min-height: 1.4em;
+      }
+      .caret {
+        display: inline-block;
+        width: 2px;
+        height: 0.95em;
+        background: var(--gold);
+        margin-left: 4px;
+        vertical-align: -0.1em;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      .hero .btn {
+        margin-top: 6px;
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 48px;
+        text-align: left;
+      }
+      /* ============================================================
+         11. CONTACT FORM
+      =============================================================== */
+      #cf {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+      }
+      #cf label {
+        display: block;
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      #cf input,
+      #cf textarea {
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: var(--ink);
+        font: inherit;
+        resize: vertical;
+      }
+      #cf input:focus,
+      #cf textarea:focus {
+        border-color: var(--gold);
+        outline: none;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 30%, transparent);
+      }
+      #cf button {
+        cursor: pointer;
+        font: inherit;
+        font-weight: 500;
+        color: #fff;
+      }
+      .st {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 14px 0 0;
+      }
+      .st button {
+        all: unset;
+        cursor: pointer;
+        color: var(--rose);
+        text-decoration: underline;
+      }
+      #toast {
+        position: fixed;
+        left: 50%;
+        bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+        translate: -50% 20px;
+        background: var(--ink);
+        color: var(--bg);
+        padding: 10px 18px;
+        border-radius: 99px;
+        font-size: 14px;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.4s;
+        z-index: 60;
+      }
+      #toast.on {
+        opacity: 1;
+        translate: -50% 0;
+      }
+      @media (max-width: 760px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .caret {
+          animation: none;
+        }
+      }
+
+      section {
+        perspective: 1200px;
+      }
+      .btn,
+      .skills span {
+        transform: perspective(600px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+          translateZ(var(--z, 0px)) scale(var(--s, 1));
+      }
+      .btn {
+        transition:
+          background 0.3s,
+          color 0.3s,
+          translate 0.25s ease-out,
+          box-shadow 0.3s,
+          transform 0.2s ease-out;
+      }
+      .skills span {
+        transition:
+          translate 0.25s,
+          background 0.25s,
+          border-color 0.25s,
+          transform 0.2s ease-out;
+      }
+      .btn:hover,
+      .skills span:hover {
+        --z: 16px;
+      }
+      .btn:active,
+      .skills span:active,
+      .proj:active {
+        --s: 0.92;
+        --z: -14px;
+      }
+      .proj:active {
+        --s: 0.975;
+      }
+      footer {
+        padding: 48px 0 56px;
+      }
+      /* ============================================================
+         12. FOOTER & SOCIAL BUTTONS
+      =============================================================== */
+      .social {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: center;
+        margin: 0 auto 32px;
+        padding: 0 24px;
+      }
+      .social .btn {
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 22px;
+        font-size: 16px;
+        background: var(--card);
+        color: var(--ink);
+      }
+      .social .btn:hover {
+        background: var(--blush);
+      }
+      .social svg {
+        width: 20px;
+        height: 20px;
+        flex: none;
+      }
+      footer p {
+        margin: 0;
+      }
+
+      /* ============================================================
+         13. CURSOR EFFECTS
+         Custom cursor dot + ring, sparkle trail, click ripple.
+      =============================================================== */
+      html.cc,
+      html.cc * {
+        cursor: none !important;
+      }
+      html.cc input,
+      html.cc textarea {
+        cursor: text !important;
+      }
+      #cur-dot,
+      #cur-ring {
+        position: fixed;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      html.cc.live #cur-dot,
+      html.cc.live #cur-ring {
+        opacity: 1;
+      }
+      html.cc.txt #cur-dot,
+      html.cc.txt #cur-ring {
+        opacity: 0;
+      }
+      #cur-dot {
+        width: 8px;
+        height: 8px;
+        margin: -4px 0 0 -4px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+      #cur-ring {
+        width: var(--w, 36px);
+        height: var(--h, 36px);
+        margin: calc(var(--h, 36px) / -2) 0 0 calc(var(--w, 36px) / -2);
+        border: 1.5px solid var(--gold);
+        border-radius: var(--r, 50%);
+        transition:
+          opacity 0.3s,
+          width 0.25s,
+          height 0.25s,
+          margin 0.25s,
+          border-radius 0.25s,
+          scale 0.15s,
+          background 0.25s;
+      }
+      #cur-ring.hot {
+        background: color-mix(in srgb, var(--gold) 14%, transparent);
+      }
+      #cur-ring.press {
+        scale: 0.75;
+      }
+      .sp {
+        position: fixed;
+        pointer-events: none;
+        z-index: 99;
+        width: var(--s);
+        height: var(--s);
+        background: var(--c);
+        clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+        animation: sp 0.9s ease-out forwards;
+      }
+      @keyframes sp {
+        from {
+          opacity: 1;
+          transform: translate(0, 0) rotate(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translate(var(--dx), var(--dy)) rotate(120deg) scale(0.2);
+        }
+      }
+      .rip {
+        position: fixed;
+        pointer-events: none;
+        z-index: 98;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border-radius: 50%;
+        border: 2px solid var(--gold);
+        animation: rip 0.7s ease-out forwards;
+      }
+      @keyframes rip {
+        from {
+          opacity: 0.9;
+          transform: scale(0.3);
+        }
+        to {
+          opacity: 0;
+          transform: scale(5);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bar"></div>
+    <div id="toast" role="status"></div>
+    <div class="wrap">
+      <!-- ===== NAVIGATION BAR (logo + links + dark/light button) ===== -->
+      <nav>
+        <span class="logo" id="lg">Ghadir Chamas</span>
+        <div>
+          <a class="hide" href="#work">Work</a><a class="hide" href="#playground">Playground</a
+          ><a class="hide" href="#about">About</a
+          ><button id="theme" aria-label="Toggle dark mode">Dark</button>
+        </div>
+      </nav>
+
+      <!-- ===== HERO: name, typing line, short intro, buttons ===== -->
+      <header class="hero">
+        <div>
+          <h1 id="nm"></h1>
+          <div class="type" aria-live="polite">
+            <span id="tw"></span><span class="caret"></span>
+          </div>
+          <p>
+            Full-stack developer who ships polished products, then wires in AI so the repetitive
+            work does itself. Open to roles, freelance projects, and curious side quests.
+          </p>
+          <a class="btn fill" href="#contact">Work with me</a
+          ><a class="btn ghost" href="#work">See my work</a
+          ><a class="btn ghost" href="#" data-cv>Download CV</a>
+        </div>
+      </header>
+    </div>
+
+    <!-- ===== PROJECTS: edit the title, description and stack inside each <article> ===== -->
+    <section id="work">
+      <div class="wrap">
+        <h2>Selected work</h2>
+        <p class="lead">
+          Three projects, each with the problem, my role, and what changed afterwards.
+        </p>
+        <div class="projects">
+          <article class="proj">
+            <div><span class="tag">Full-stack · 2025</span></div>
+            <div>
+              <h3>Project One</h3>
+              <p>
+                The problem it solved and who it was for. Your role, and the result: "cut onboarding
+                time by 60%."
+              </p>
+              <span class="stack">React · Node · Postgres</span>
+            </div>
+          </article>
+          <article class="proj">
+            <div><span class="tag">AI automation · 2025</span></div>
+            <div>
+              <h3>Project Two</h3>
+              <p>
+                A workflow that replaced hours of manual work each week. Add the hours saved or
+                errors avoided.
+              </p>
+              <span class="stack">Python · OpenAI · n8n</span>
+            </div>
+          </article>
+          <article class="proj">
+            <div><span class="tag">Side project · 2024</span></div>
+            <div>
+              <h3>Project Three</h3>
+              <p>Something you built for the joy of it. Link the live demo and the repo.</p>
+              <span class="stack">Next.js · Supabase</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AI AUTOMATION PLAYGROUND (visitors build and "run" a mini workflow) ===== -->
+    <section id="playground">
+      <div class="wrap">
+        <h2>Automation playground</h2>
+        <p class="lead">
+          Build a tiny workflow and run it. This is a simulation of how I'd wire up a real one.
+        </p>
+        <div class="play">
+          <div>
+            <label for="t">When this happens</label>
+            <select id="t">
+              <option>A new lead fills out the contact form</option>
+              <option>A customer email arrives</option>
+              <option>Every Monday at 9am</option>
+            </select>
+            <label for="a">Let AI</label>
+            <select id="a">
+              <option>Summarize and score it</option>
+              <option>Draft a friendly reply</option>
+              <option>Sort it into a category</option>
+            </select>
+            <label for="o">Then</label>
+            <select id="o">
+              <option>Post to Slack</option>
+              <option>Add a row to Google Sheets</option>
+              <option>Create a Notion task</option>
+            </select>
+            <button class="btn fill" id="run">Run workflow</button>
+          </div>
+          <div class="log" id="log" aria-live="polite">
+            <span class="dim">Choose your steps, then run the workflow.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ME + skills list (edit the <span> tags to change skills) ===== -->
+    <section id="about">
+      <div class="wrap about">
+        <div>
+          <h2>About me</h2>
+          <p style="margin-top: 20px">
+            A short, human paragraph goes here: how you got into code, what you care about, and what
+            you do when the laptop is closed.
+          </p>
+          <p>I like products that feel considered, from the database schema to the hover state.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 28px; margin-bottom: 16px">Tools I reach for</h3>
+          <div class="skills">
+            <span>TypeScript</span><span>React</span><span>Node</span><span>Postgres</span
+            ><span>Python</span><span>LLM APIs</span><span>n8n / Zapier</span><span>Docker</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT: message form (opens the visitor's email app) ===== -->
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <h2>Let's make something lovely.</h2>
+          <p class="lead" style="margin-top: 16px">
+            Hiring, a project in mind, or an automation idea? Write me a quick note and I'll reply
+            within two days.
+          </p>
+        </div>
+        <form id="cf" autocomplete="on">
+          <label for="fn">Ghadir Chamas</label><input id="fn" name="name" required /><label for="fe"
+            >Your email</label
+          ><input id="fe" name="email" type="email" required /><label for="fm">Message</label
+          ><textarea id="fm" name="msg" rows="5" required></textarea>
+          <button class="btn fill" type="submit">Send message</button>
+          <p id="st" class="st" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+    <!-- ===== FOOTER: social buttons + copyright ===== -->
+    <footer>
+      <div class="social">
+        <a class="btn ghost" data-link="https://www.linkedin.com/in/ghadir-shamas" href="#"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.063 2.063 0 1 1 0-4.128 2.063 2.063 0 0 1 0 4.128zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"
+            /></svg
+          >LinkedIn</a
+        ><a class="btn ghost" data-link="github" href="#"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+            /></svg
+          >GitHub</a
+        ><a class="btn ghost" data-link="email" href="#"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m3.5 7 8.5 6.5L20.5 7"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            /></svg
+          >Email</a
+        >
+      </div>
+      <p>© 2026 <span id="ft">Ghadir Chamas</span></p>
+    </footer>
+
+    <script>
+      /* ============================================================
+   CONFIG - EDIT YOUR DETAILS HERE
+   name    : shown in the hero, logo and footer
+   email   : where the contact form sends messages
+   cvUrl   : path to your CV file, e.g. "cv.pdf" (leave "" for now)
+   github / linkedin : your profile links
+   titles  : the words that type and erase under your name
+   ============================================================ */
+      const CONFIG = {
+        name: "Ghadir Chamas",
+        email: "ghadirshamas12@gmail.com",
+        cvUrl: "cv.pdf",
+        github: "https://github.com/yourname",
+        linkedin: "https://www.linkedin.com/in/ghadir-shamas",
+        titles: ["Full stack developer", "AI automation"],
+      };
+    </script>
+    <script>
+      // ===== A. DARK / LIGHT MODE BUTTON (remembers the visitor's choice) =====
+      const root = document.documentElement,
+        tb = document.getElementById("theme");
+      try {
+        const s = localStorage.getItem("theme");
+        if (s) {
+          root.dataset.theme = s;
+          tb.textContent = s === "dark" ? "Light" : "Dark";
+        }
+      } catch (e) {}
+      tb.onclick = () => {
+        const dark =
+          getComputedStyle(root).getPropertyValue("--bg").trim().toLowerCase() === "#0f1e3f";
+        const n = dark ? "light" : "dark";
+        root.dataset.theme = n;
+        tb.textContent = dark ? "Dark" : "Light";
+        try {
+          localStorage.setItem("theme", n);
+        } catch (e) {}
+      };
+      const v = (id) => document.getElementById(id).value,
+        log = document.getElementById("log"),
+        btn = document.getElementById("run");
+      btn.onclick = () => {
+        btn.disabled = true;
+        log.innerHTML = "";
+        const steps = [
+          ["dim", "Trigger received: " + v("t").toLowerCase()],
+          ["dim", "Sending to AI step: " + v("a").toLowerCase() + "…"],
+          ["ok", "AI result ready (0.8s)"],
+          ["dim", v("o") + "…"],
+          ["ok", "Done. 3 steps, 0 errors, 4 minutes of manual work saved."],
+        ];
+        steps.forEach((s, i) =>
+          setTimeout(() => {
+            const d = document.createElement("div");
+            d.className = s[0];
+            d.textContent = (s[0] === "ok" ? "✓ " : "· ") + s[1];
+            log.appendChild(d);
+            if (i === steps.length - 1) btn.disabled = false;
+          }, i * 650),
+        );
+      };
+
+      // ===== B. FILL IN YOUR DETAILS, TYPING EFFECT, CV BUTTON, CONTACT FORM =====
+      (function () {
+        const nm = CONFIG.name.trim().split(/\s+/);
+        const last = nm.pop();
+        document.getElementById("nm").innerHTML =
+          (nm.length ? nm.join(" ") + " " : "") + "<em>" + last + "</em>";
+        document.getElementById("lg").textContent = CONFIG.name;
+        document.getElementById("ft").textContent = CONFIG.name;
+        // Typing effect: types each word in CONFIG.titles, erases it, then moves to the next
+        const tw = document.getElementById("tw"),
+          T = CONFIG.titles,
+          rm = matchMedia("(prefers-reduced-motion:reduce)").matches;
+        if (rm) {
+          tw.textContent = T[0];
+        } else {
+          let ti = 0,
+            ci = 0,
+            del = false;
+          (function tick() {
+            const w = T[ti];
+            ci += del ? -1 : 1;
+            tw.textContent = w.slice(0, ci);
+            let d = del ? 35 : 75;
+            if (!del && ci === w.length) {
+              del = true;
+              d = 1500;
+            } else if (del && ci === 0) {
+              del = false;
+              ti = (ti + 1) % T.length;
+              d = 400;
+            }
+            setTimeout(tick, d);
+          })();
+        }
+        document.querySelectorAll("[data-link]").forEach((a) => {
+          const k = a.dataset.link;
+          a.href = k === "email" ? "mailto:" + CONFIG.email : CONFIG[k];
+          if (k !== "email") {
+            a.target = "_blank";
+            a.rel = "noopener";
+          }
+        });
+        const toast = document.getElementById("toast");
+        let tt;
+        function say(m) {
+          toast.textContent = m;
+          toast.classList.add("on");
+          clearTimeout(tt);
+          tt = setTimeout(() => toast.classList.remove("on"), 3500);
+        }
+        const slug = CONFIG.name.replace(/\s+/g, "_");
+        // CV button: saves your CV (or a simple starter CV if cvUrl is empty)
+        function cvText() {
+          const sk = [...document.querySelectorAll(".skills span")]
+            .map((x) => x.textContent)
+            .join(", ");
+          return (
+            "# " +
+            CONFIG.name +
+            "\n\n" +
+            CONFIG.titles.join(" | ") +
+            "\n\n## Skills\n" +
+            sk +
+            "\n\n## Contact\n" +
+            CONFIG.email +
+            "\n"
+          );
+        }
+        document.querySelectorAll("[data-cv]").forEach((b) =>
+          b.addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+              const dl = window.claude && (await window.claude.use("downloads"));
+              if (!dl) {
+                if (CONFIG.cvUrl) window.open(CONFIG.cvUrl, "_blank", "noopener");
+                else say("CV download is not available here");
+                return;
+              }
+              if (CONFIG.cvUrl) {
+                const r = await fetch(CONFIG.cvUrl);
+                await dl.save({ filename: slug + "_CV.pdf", data: await r.blob() });
+              } else await dl.save({ filename: slug + "_CV.md", data: cvText() });
+            } catch (err) {
+              if (!err || err.code !== "declined") say("Could not start the download");
+            }
+          }),
+        );
+        // Contact form: builds an email and opens the visitor's email app
+        const f = document.getElementById("cf"),
+          st = document.getElementById("st");
+        f.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const subj = "Portfolio message from " + f.name.value,
+            body = f.msg.value + "\n\n— " + f.name.value + " (" + f.email.value + ")";
+          const a = document.createElement("a");
+          a.href =
+            "mailto:" +
+            CONFIG.email +
+            "?subject=" +
+            encodeURIComponent(subj) +
+            "&body=" +
+            encodeURIComponent(body);
+          a.target = "_blank";
+          a.rel = "noopener";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          st.textContent = "Opening your email app… if nothing opens, ";
+          const c = document.createElement("button");
+          c.type = "button";
+          c.textContent = "copy the message";
+          c.onclick = async () => {
+            try {
+              await navigator.clipboard.writeText(
+                "To: " + CONFIG.email + "\nSubject: " + subj + "\n\n" + body,
+              );
+              c.textContent = "copied!";
+            } catch (x) {
+              c.textContent = "copy failed, select it manually";
+            }
+          };
+          st.appendChild(c);
+          st.append(" and send it to " + CONFIG.email + ".");
+        });
+      })();
+      // ===== C. 3D TILT: buttons and skill pills lean toward your cursor and press down =====
+      (function () {
+        if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+        document.querySelectorAll(".btn,.skills span").forEach((c) => {
+          c.addEventListener("pointermove", (e) => {
+            const b = c.getBoundingClientRect(),
+              x = (e.clientX - b.left) / b.width,
+              y = (e.clientY - b.top) / b.height;
+            c.style.setProperty("--ry", (x - 0.5) * 18 + "deg");
+            c.style.setProperty("--rx", (0.5 - y) * 18 + "deg");
+          });
+          c.addEventListener("pointerleave", () => {
+            c.style.setProperty("--rx", "0deg");
+            c.style.setProperty("--ry", "0deg");
+          });
+        });
+      })();
+      // ===== D. SCROLL & HOVER: words rise in, sections flip up, cards tilt + glow, progress bar =====
+      (function () {
+        const still = matchMedia("(prefers-reduced-motion:reduce)").matches;
+        const h1 = document.querySelector(".hero h1");
+        let i = 0;
+        const wrap = (t) =>
+          t
+            .split(/(\s+)/)
+            .map((x) =>
+              !x || /\s/.test(x)
+                ? x
+                : '<span class="wd"><span style="--i:' + i++ + '">' + x + "</span></span>",
+            )
+            .join("");
+        h1.innerHTML = [...h1.childNodes]
+          .map((n) =>
+            n.nodeType === 3 ? wrap(n.textContent) : "<em>" + wrap(n.textContent) + "</em>",
+          )
+          .join("");
+        const io = new IntersectionObserver(
+          (es) =>
+            es.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.15 },
+        );
+        document
+          .querySelectorAll(
+            ".hero p,.hero .btn,section h2,.lead,.proj,.play,.about>div,.skills span,.contact .links",
+          )
+          .forEach((el) => {
+            if (
+              (!el.classList.contains("proj") && !el.classList.contains("btn")) ||
+              el.classList.contains("proj")
+            ) {
+            }
+            el.classList.add("rv");
+            const k = [...el.parentNode.children].indexOf(el);
+            el.style.setProperty("--d", k * 0.09 + "s");
+            still ? el.classList.add("in") : io.observe(el);
+          });
+        document.querySelectorAll(".proj").forEach((c) => {
+          c.addEventListener("pointermove", (e) => {
+            const b = c.getBoundingClientRect(),
+              x = (e.clientX - b.left) / b.width,
+              y = (e.clientY - b.top) / b.height;
+            c.style.setProperty("--ry", (x - 0.5) * 7 + "deg");
+            c.style.setProperty("--rx", (0.5 - y) * 7 + "deg");
+            c.style.setProperty("--mx", x * 100 + "%");
+            c.style.setProperty("--my", y * 100 + "%");
+          });
+          c.addEventListener("pointerleave", () => {
+            c.style.setProperty("--rx", "0deg");
+            c.style.setProperty("--ry", "0deg");
+          });
+        });
+        const bar = document.getElementById("bar"),
+          st = document.getElementById("stage");
+        function sc() {
+          const m = document.documentElement.scrollHeight - innerHeight;
+          bar.style.transform = "scaleX(" + (m > 0 ? scrollY / m : 0) + ")";
+          if (!still && st) st.style.translate = "0 " + scrollY * 0.07 + "px";
+        }
+        addEventListener("scroll", sc, { passive: true });
+        sc();
+      })();
+
+            // ===== E. CURSOR EFFECTS: sparkle trail + magnetic ring + click ripple =====
+      (function () {
+        if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+        const root = document.documentElement,
+          fine = matchMedia("(pointer:fine)").matches;
+        let sparks = 0;
+        function spark(x, y, spread) {
+          if (sparks > 80) return;
+          const s = document.createElement("span"),
+            z = 3 + Math.random() * 7;
+          s.className = "sp";
+          s.style.cssText =
+            "left:" +
+            (x - z / 2) +
+            "px;top:" +
+            (y - z / 2) +
+            "px;--s:" +
+            z +
+            "px;--c:var(" +
+            (Math.random() < 0.5 ? "--gold" : "--rose") +
+            ");--dx:" +
+            (Math.random() - 0.5) * spread +
+            "px;--dy:" +
+            (18 + Math.random() * (spread * 0.8)) +
+            "px";
+          document.body.appendChild(s);
+          sparks++;
+          s.addEventListener("animationend", () => {
+            s.remove();
+            sparks--;
+          });
+        }
+        function ripple(x, y) {
+          const r = document.createElement("span");
+          r.className = "rip";
+          r.style.left = x + "px";
+          r.style.top = y + "px";
+          document.body.appendChild(r);
+          r.addEventListener("animationend", () => r.remove());
+        }
+        let ring = null;
+        addEventListener("pointerdown", (e) => {
+          ripple(e.clientX, e.clientY);
+          for (let i = 0; i < 8; i++) spark(e.clientX, e.clientY, 90);
+          if (ring) ring.classList.add("press");
+        });
+        addEventListener("pointerup", () => {
+          if (ring) ring.classList.remove("press");
+        });
+        if (!fine) return;
+        const dot = document.createElement("div"),
+          rg = document.createElement("div");
+        dot.id = "cur-dot";
+        rg.id = "cur-ring";
+        document.body.append(dot, rg);
+        ring = rg;
+        root.classList.add("cc");
+        const targets = [...document.querySelectorAll(".btn,nav a,#theme")];
+        const PULL = 90;
+        let mx = -200,
+          my = -200,
+          rx = -200,
+          ry = -200,
+          lx = 0,
+          ly = 0;
+        addEventListener("pointermove", (e) => {
+          if (e.pointerType === "touch") return;
+          mx = e.clientX;
+          my = e.clientY;
+          root.classList.add("live");
+          root.classList.toggle("txt", !!(e.target.closest && e.target.closest("input,textarea")));
+          if (Math.hypot(mx - lx, my - ly) > 14) {
+            spark(mx, my, 50);
+            lx = mx;
+            ly = my;
+          }
+        });
+        root.addEventListener("mouseleave", () => root.classList.remove("live"));
+        function frame() {
+          let best = null,
+            bd = 1e9,
+            bb = null;
+          for (const el of targets) {
+            const b = el.getBoundingClientRect();
+            if (!b.width) continue;
+            const dx = Math.max(b.left - mx, 0, mx - b.right),
+              dy = Math.max(b.top - my, 0, my - b.bottom),
+              d = Math.hypot(dx, dy);
+            if (d < bd) {
+              bd = d;
+              best = el;
+              bb = b;
+            }
+          }
+          let tx = mx,
+            ty = my,
+            w = 36,
+            h = 36,
+            r = "50%",
+            hot = false;
+          if (best && bd < PULL) {
+            const cx = bb.left + bb.width / 2,
+              cy = bb.top + bb.height / 2;
+            if (bd === 0) {
+              tx = cx;
+              ty = cy;
+              w = bb.width + 14;
+              h = bb.height + 14;
+              r = (parseFloat(getComputedStyle(best).borderTopLeftRadius) || 0) + 7 + "px";
+              hot = true;
+            } else {
+              const k = (1 - bd / PULL) * 0.6;
+              tx = mx + (cx - mx) * k;
+              ty = my + (cy - my) * k;
+            }
+          }
+          rx += (tx - rx) * 0.2;
+          ry += (ty - ry) * 0.2;
+          dot.style.transform = "translate(" + mx + "px," + my + "px)";
+          rg.style.transform = "translate(" + rx + "px," + ry + "px)";
+          rg.style.setProperty("--w", w + "px");
+          rg.style.setProperty("--h", h + "px");
+          rg.style.setProperty("--r", r);
+          rg.classList.toggle("hot", hot);
+          requestAnimationFrame(frame);
+        }
+        frame();
+      })();
+    </script>
+  </body>
+</html>
